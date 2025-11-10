@@ -1,5 +1,4 @@
-import numpy
-import string
+
 
 def ParseSeqFile(string):
 
@@ -17,7 +16,8 @@ def ParseSeqFile(string):
                     text = lines[1:]
                     species = text.split()[0]
                     the_rest = text.split()[1:]
-                    print(species)
+
+                    #print(species)
                     #print(the_rest)
                     dictionary_of_lines[species] = the_rest
 
