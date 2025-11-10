@@ -8,21 +8,26 @@ def ParseSeqFile(string):
     dictionary_of_lines = {}
 
     try:
-        for lines in lines:
-            if not (lines[0].startswith('>') or lines[0].startswith('\n')):
-                raise ValueError("malformed input at:", lines)
+        for line in lines:
+            if not (line[0].startswith('>') or line[0].startswith('\n')):
+                raise ValueError("malformed input at:", line)
             else:
-                if not lines[0].startswith('\n'):
-                    text = lines[1:]
-                    species = text.split()[0]
-                    the_rest = text.split()[1:]
-
-                    #print(species)
-                    #print(the_rest)
-                    dictionary_of_lines[species] = the_rest
+                if not line[0].startswith('\n'):
+                    parts = line.split()
+                    header = parts[0]
+                    sequence = "".join(parts[1:])
+                    dictionary_of_lines[header] = sequence
 
     except ValueError as ve:
         print(ve)
+
+    try:
+        for words in dictionary_of_lines.values():
+            for char in words:
+                if char not in ('A', 'C', 'T', 'G') and not char.isspace():
+                    raise ValueError(f"malformed input at: {char}")
+    except ValueError as ve2:
+        print(ve2)
 
     print(dictionary_of_lines)
 
