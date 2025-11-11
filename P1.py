@@ -10,7 +10,7 @@ def ParseSeqFile(string):
     try:
         for line in lines:
             if not (line[0].startswith('>') or line[0].startswith('\n')):
-                raise ValueError("malformed input at:", line)
+                raise ValueError(f"malformed input at: {line}")
             else:
                 if not line[0].startswith('\n'):
                     parts = line.split()
