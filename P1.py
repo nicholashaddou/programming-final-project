@@ -5,8 +5,6 @@ This module provides functions to read sequence files, extract headers and seque
 and validate the input data. Functions in this module raise `ValueError` for
 malformed inputs, such as incorrect headers or invalid characters in sequences.
 """
-import sys
-
 def ParseSeqFile(string):
 
     text_file = open(string, 'r')
@@ -39,6 +37,5 @@ def ParseSeqFile(string):
 
     text_file.close()
     return dictionary_of_lines
-# Example usage
 
 ParseSeqFile("dummy file.txt")
