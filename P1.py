@@ -1,4 +1,10 @@
+"""
+Module for parsing sequence files.
 
+This module provides functions to read sequence files, extract headers and sequences,
+and validate the input data. Functions in this module raise `ValueError` for
+malformed inputs, such as incorrect headers or invalid characters in sequences.
+"""
 
 def ParseSeqFile(string):
 
@@ -29,8 +35,6 @@ def ParseSeqFile(string):
     except ValueError as ve2:
         print(ve2)
 
-    print(dictionary_of_lines)
+    return dictionary_of_lines
 
 ParseSeqFile("dummy file.txt")
-
-
