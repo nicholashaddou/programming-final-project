@@ -5,6 +5,7 @@ This module provides functions to read sequence files, extract headers and seque
 and validate the input data. Functions in this module raise `ValueError` for
 malformed inputs, such as incorrect headers or invalid characters in sequences.
 """
+import sys
 
 def ParseSeqFile(string):
 
@@ -20,20 +21,23 @@ def ParseSeqFile(string):
             else:
                 if not line[0].startswith('\n'):
                     parts = line.split()
-                    header = parts[0]
+                    label = parts[0]
                     sequence = "".join(parts[1:])
-                    dictionary_of_lines[header] = sequence
+                    dictionary_of_lines[label] = sequence
 
     except ValueError as ve:
         print(ve)
+        sys.exit(1)
 
+    #This is not efficient, works for now but we should make it more efficient later
     try:
         for words in dictionary_of_lines.values():
             for char in words:
                 if char not in ('A', 'C', 'T', 'G') and not char.isspace():
-                    raise ValueError(f"malformed input at: {char}")
+                    raise ValueError(f"malformed input due to: {char} at {words}")
     except ValueError as ve2:
         print(ve2)
+        sys.exit(1)
 
     return dictionary_of_lines
 
