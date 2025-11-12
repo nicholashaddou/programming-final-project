@@ -14,13 +14,13 @@ def ParseSeqFile(string):
 
     try:
         for line in lines:
-            if not (line[0].startswith('>') or line[0].startswith('\n')):
+            if not (line[0].startswith('>') or line[0].isspace()):
                 raise ValueError(f"malformed input at: {line}")
             else:
-                if not line[0].startswith('\n'):
+                if not line[0].isspace():
                     parts = line.split()
                     label = parts[0]
-                    sequence = "".join(parts[1:])
+                    sequence = "".join(parts[1:]) #depending on P2, we can change this to a " " to leave the gap and later on put a - for genomic gap
                     dictionary_of_lines[label] = sequence
 
     except ValueError:
