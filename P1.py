@@ -38,4 +38,10 @@ def ParseSeqFile(string):
     text_file.close()
     return dictionary_of_lines
 
-ParseSeqFile("dummy file.txt")
+def dictionary_to_list(string):
+    ParseSeqFile(string)
+    list_from_dictionary = list(ParseSeqFile(string).items())
+    print (list_from_dictionary)
+    return list_from_dictionary
+
+dictionary_to_list("dummy file.txt")
