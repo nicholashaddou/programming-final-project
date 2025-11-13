@@ -1,23 +1,47 @@
-import numpy
-import string
+"""
+Module for parsing sequence files.
 
+This module provides functions to read sequence files, extract headers and sequences,
+and validate the input data. Functions in this module raise `ValueError` for
+malformed inputs, such as incorrect headers or invalid characters in sequences.
+"""
 def ParseSeqFile(string):
+
     text_file = open(string, 'r')
-    #print(text_file.read())
+
     lines = text_file.readlines()
-    list_of_lines = []
+    dictionary_of_lines = {}
 
     try:
-        for lines in lines:
-            if not (lines[0].startswith('>') or lines[0].startswith('\n')):
-                raise ValueError("malformed input at:", lines)
+        for line in lines:
+            if not (line[0].startswith('>') or line[0].isspace()):
+                raise ValueError(f"malformed input at: {line}")
             else:
-                list_of_lines.append(lines.strip())
-    except ValueError as ve:
-        print(ve)
+                if not line[0].isspace():
+                    parts = line.split()
+                    label = parts[0]
+                    sequence = "".join(parts[1:]) #depending on P2, we can change this to a " " to leave the gap and later on put a - for genomic gap
+                    dictionary_of_lines[label] = sequence
 
-    #print(list_of_lines)
+    except ValueError:
+        raise ValueError("Malformed input")
 
-ParseSeqFile("dummy file.txt")
+    #This is not efficient, works for now but we should make it more efficient later
+    try:
+        for words in dictionary_of_lines.values():
+            for char in words:
+                if char not in ('A', 'C', 'T', 'G') and not char.isspace():
+                    raise ValueError(f"malformed input due to: {char} at {words}")
+    except ValueError:
+        raise ValueError("Malformed input")
 
+    text_file.close()
+    return dictionary_of_lines
 
+def dictionary_to_list(string):
+    ParseSeqFile(string)
+    list_from_dictionary = list(ParseSeqFile(string).items())
+    print (list_from_dictionary)
+    return list_from_dictionary
+
+dictionary_to_list("dummy file.txt")
