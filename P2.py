@@ -36,13 +36,18 @@ def get_label():
     print(list_of_labels)
     return list_of_labels
 
-get_label()
+labels = get_label()
 sorted_sequence = get_sequence_string()
 
 def AlignByDP(string):
 
+    # labels = get_label()
+    # sorted_sequence = get_sequence_string()
+
     match = 2
     mismatch = -1
     gap = -2
+
+
 
 

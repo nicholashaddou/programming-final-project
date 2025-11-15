@@ -20,7 +20,7 @@ def ParseSeqFile(string):
                 if not line[0].isspace():
                     parts = line.split()
                     label = parts[0]
-                    sequence = "".join(parts[1:]) #depending on P2, we can change this to a " " to leave the gap and later on put a - for genomic gap
+                    sequence = " ".join(parts[1:]) #depending on P2, we can change this to a " " to leave the gap and later on put a - for genomic gap
                     dictionary_of_lines[label] = sequence
 
     except ValueError:
