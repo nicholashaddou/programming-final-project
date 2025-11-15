@@ -58,6 +58,14 @@ class Cell:
     def get_row(self):
         return self.row
 
+    def get_col(self):
+        return self.col
+
+    def set_previous_cell(self, prev_cell):
+        self.prev_cell = prev_cell
+
+    def get_previous_cell(self):
+        return self.prev_cell
 
 #----------------------------------------------------------
 
