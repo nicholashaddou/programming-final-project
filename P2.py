@@ -18,13 +18,25 @@ genomic_sequence = P1.dictionary_to_list("dummy file.txt") # this is a list
 def get_sequence_string():
 
     list_of_sequences = []
-    for _ in genomic_sequence:
-        sequence = genomic_sequence[0]
+
+    for sequence in genomic_sequence:
         string_sequence = sequence[1]
         list_of_sequences.append(string_sequence)
 
+    print(list_of_sequences)
     return list_of_sequences
 
+def get_label():
+
+    list_of_labels = []
+    for labels in genomic_sequence:
+        string_sequence = labels[0]
+        list_of_labels.append(string_sequence)
+
+    print(list_of_labels)
+    return list_of_labels
+
+get_label()
 sorted_sequence = get_sequence_string()
 
 def AlignByDP(string):
