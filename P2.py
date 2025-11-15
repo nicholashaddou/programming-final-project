@@ -36,17 +36,44 @@ def get_label():
     print(list_of_labels)
     return list_of_labels
 
-labels = get_label()
-sorted_sequence = get_sequence_string()
+# labels_list = get_label()
+# sorted_sequence_list = get_sequence_string()
 
-def AlignByDP(string):
+"""
+Setting cells
+"""
+class Cell:
+    def __init__(self, row, col):
+        self.prev_cell = None
+        self.score = 0
+        self.row = row
+        self.col = col
 
-    # labels = get_label()
-    # sorted_sequence = get_sequence_string()
+    def set_score(self, score):
+        self.score = score
+
+    def get_score(self):
+        return self.score
+
+    def get_row(self):
+        return self.row
+
+
+#----------------------------------------------------------
+
+def AlignByDP():
+
+    labels_list = get_label()
+    sorted_sequence_list = get_sequence_string()
 
     match = 2
     mismatch = -1
     gap = -2
+
+    sequence1 = sorted_sequence_list[0]
+    sequence2 = sorted_sequence_list[1]
+
+AlignByDP()
 
 
 
