@@ -41,7 +41,6 @@ def ParseSeqFile(string):
 def dictionary_to_list(string):
     ParseSeqFile(string)
     list_from_dictionary = list(ParseSeqFile(string).items())
-    print (list_from_dictionary)
     return list_from_dictionary
 
 dictionary_to_list("dummy file.txt")
