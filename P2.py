@@ -68,20 +68,6 @@ class Cell:
         return self.prev_cell
 
 #----------------------------------------------------------
-
-def AlignByDP():
-
-    labels_list = get_label()
-    sorted_sequence_list = get_sequence_string()
-
-    match = 2
-    mismatch = -1
-    gap = -2
-
-    # sequence1 = sorted_sequence_list[0]
-    # sequence2 = sorted_sequence_list[1]
-
-
 class Alignment:
     def __init__(self, sequence1, sequence2, match = 2 ,mismatch = -1,gap = -2):
         self.sequence1 = sequence1
@@ -95,14 +81,30 @@ class Alignment:
         row = len(self.sequence1) + 1
         col = len(self.sequence2) + 1
 
-        self.matrix = [[Cell(i,j) for i in range(col) for j in range(row)]]
+        self.matrix = [[Cell(i, j) for j in range(col)] for i in range(row)] #CHATGPT was used here, prompt: the matrix made rows instead of a 2d matrix
 
         for i in range(1,row):
             self.matrix[i][0].score += self.gap
         for j in range(1,col):
             self.matrix[0][j].score += self.gap
 
-AlignByDP()
+    def align_sequences(self):
+        labels_list = get_label()
+        sorted_sequence_list = get_sequence_string()
+        self.sequence1 = sorted_sequence_list[0]
+        self.sequence2 = sorted_sequence_list[1]
+        # at this point we have the two sequences
+
+
+# def AlignByDP(Alignment):
+#     alignment  = Alignment()
+#     alignment.make_matrix()
+#     alignment.align_sequences()
+
+
+
+
+# AlignByDP()
 
 
 
