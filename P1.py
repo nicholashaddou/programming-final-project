@@ -41,7 +41,6 @@ def ParseSeqFile(string):
     return dictionary_of_lines
 
 def dictionary_to_list(string):
-    ParseSeqFile(string)
     list_from_dictionary = list(ParseSeqFile(string).items())
     return list_from_dictionary
 
