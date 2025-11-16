@@ -24,6 +24,7 @@ def ParseSeqFile(string):
                     dictionary_of_lines[label] = sequence
 
     except ValueError:
+        text_file.close()
         raise ValueError("Malformed input")
 
     #This is not efficient, works for now but we should make it more efficient later
@@ -33,6 +34,7 @@ def ParseSeqFile(string):
                 if char not in ('A', 'C', 'T', 'G') and not char.isspace():
                     raise ValueError(f"malformed input due to: {char} at {words}")
     except ValueError:
+        text_file.close()
         raise ValueError("Malformed input")
 
     text_file.close()

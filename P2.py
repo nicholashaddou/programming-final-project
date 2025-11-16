@@ -78,8 +78,29 @@ def AlignByDP():
     mismatch = -1
     gap = -2
 
-    sequence1 = sorted_sequence_list[0]
-    sequence2 = sorted_sequence_list[1]
+    # sequence1 = sorted_sequence_list[0]
+    # sequence2 = sorted_sequence_list[1]
+
+
+class Alignment:
+    def __init__(self, sequence1, sequence2, match = 2 ,mismatch = -1,gap = -2):
+        self.sequence1 = sequence1
+        self.sequence2 = sequence2
+        self.match = match
+        self.mismatch = mismatch
+        self.gap = gap
+        self.matrix = []
+
+    def make_matrix(self):
+        row = len(self.sequence1) + 1
+        col = len(self.sequence2) + 1
+
+        self.matrix = [[Cell(i,j) for i in range(col) for j in range(row)]]
+
+        for i in range(1,row):
+            self.matrix[i][0].score += self.gap
+        for j in range(1,col):
+            self.matrix[0][j].score += self.gap
 
 AlignByDP()
 
