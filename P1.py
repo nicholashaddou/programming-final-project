@@ -31,7 +31,7 @@ def ParseSeqFile(string):
     try:
         for words in dictionary_of_lines.values():
             for char in words:
-                if char not in ('A', 'C', 'T', 'G') and not char.isspace():
+                if char not in ('A', 'C', 'T', 'G', 'a', 'c', 't', 'g') and not char.isspace():
                     raise ValueError(f"malformed input due to: {char} at {words}")
     except ValueError:
         text_file.close()
