@@ -103,6 +103,7 @@ class Alignment:
 
 def match_length():
 
+    # Only for two sequences, need to fix for more, not sure how Manuel will input the sequences
     sorted_sequence_list = get_sequence_string()
     for i in range(len(sorted_sequence_list) - 1):
         sorted_sequence_list = [s.replace(" ", "-") for s in sorted_sequence_list]
