@@ -82,24 +82,37 @@ class Alignment:
         row = len(self.sequence1) + 1
         col = len(self.sequence2) + 1
 
-        self.matrix = [[Cell(i,j) for i in range(col) for j in range(row)]]
+        self.matrix = [[Cell(i, j) for j in range(col)] for i in range(row)]
 
-        for i in range(0,row):
-            self.matrix[i][0].score += self.gap
-        for j in range(0,col):
-            self.matrix[0][j].score += self.gap
+        for i in range(row):
+            self.matrix[i][0].score = i * self.gap
+        for j in range(col):
+            self.matrix[0][j].score = j * self.gap
 
     def align_sequences(self):
         self.make_matrix()
-        for i in self.matrix:
-            for j in self.matrix:
+        diag_score = 0
+        row = len(self.sequence1) + 1
+        col = len(self.sequence2) + 1
+
+        #something wrong with the logic here
+        for i in range(1, row):
+            for j in range(1, col):
                 if self.sequence1[i-1] == self.sequence2[j-1]:
                     diag_score = self.matrix[i-1][j-1].get_score() + self.match
                 if self.sequence1[i-1] != self.sequence2[j-1]:
                     diag_score = self.matrix[i-1][j-1].get_score() + self.mismatch
                 else:
                     diag_score = self.matrix[i-1][j-1].get_score() + self.gap
-        pass
+
+        print(diag_score)
+
+        # might work better
+        # diag = self.matrix[i - 1][j - 1].score + (
+        #     self.match if self.sequence1[i - 1] == self.sequence2[j - 1] else self.mismatch)
+        # up = self.matrix[i - 1][j].score + self.gap
+        # left = self.matrix[i][j - 1].score + self.gap
+        # self.matrix[i][j].score = max(diag, up, left)
 
 def match_length():
 
@@ -119,11 +132,10 @@ def match_length():
 def AlignByDP():
 
     labels_list = get_label()
-
+    sorted_sequence_list = get_sequence_string()
     match_length()
-    # alignment = Alignment(sorted_sequence_list[0], sorted_sequence_list[1])
-    #
-    # alignment.align_sequences()
+    alignment = Alignment(sorted_sequence_list[0], sorted_sequence_list[1])
 
+    alignment.align_sequences()
 
 AlignByDP()
