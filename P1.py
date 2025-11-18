@@ -24,23 +24,22 @@ def ParseSeqFile(string):
                     dictionary_of_lines[label] = sequence
 
     except ValueError:
+        text_file.close()
         raise ValueError("Malformed input")
 
     #This is not efficient, works for now but we should make it more efficient later
     try:
         for words in dictionary_of_lines.values():
             for char in words:
-                if char not in ('A', 'C', 'T', 'G') and not char.isspace():
+                if char not in ('A', 'C', 'T', 'G', 'a', 'c', 't', 'g') and not char.isspace():
                     raise ValueError(f"malformed input due to: {char} at {words}")
+
     except ValueError:
+        text_file.close()
         raise ValueError("Malformed input")
 
     text_file.close()
-    return dictionary_of_lines
-
-def dictionary_to_list(string):
-    ParseSeqFile(string)
-    list_from_dictionary = list(ParseSeqFile(string).items())
+    list_from_dictionary = list(dictionary_of_lines.items())
     return list_from_dictionary
 
-dictionary_to_list("dummy file.txt")
+ParseSeqFile("dummy file alignment.txt")
