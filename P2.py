@@ -82,7 +82,7 @@ class Alignment:
         row = len(self.sequence1) + 1
         col = len(self.sequence2) + 1
 
-        self.matrix = [[Cell(i, j) for j in range(col)] for i in range(row)]
+        self.matrix = [[Cell(i, j) for j in range(col)] for i in range(row)] #chatgpt was used here, prompt: what is wrong with this? [block of code]
 
         for i in range(row):
             self.matrix[i][0].score = i * self.gap
@@ -128,7 +128,7 @@ def match_length():
         else:
             sorted_sequence_list[i + 1] += "-" * (len(sorted_sequence_list[i]) - len(sorted_sequence_list[i + 1]))
 
-    print(sorted_sequence_list)
+    #print(sorted_sequence_list)
 
 def AlignByDP():
 
