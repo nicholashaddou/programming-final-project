@@ -12,7 +12,7 @@ choose the best outcome for the end sequence
 
 if there is a gap, put " - " so the end sequences would have the same length
 """
-genomic_sequence = P1.ParseSeqFile("dummy file.txt") # this is a list
+genomic_sequence = P1.ParseSeqFile("dummy file alignment.txt") # this is a list
 
 #method to extract the string of sequence and label from the list
 def get_sequence_string():
@@ -101,19 +101,25 @@ class Alignment:
                     diag_score = self.matrix[i-1][j-1].get_score() + self.gap
         pass
 
+def match_length():
+
+    sorted_sequence_list = get_sequence_string()
+    for i in range(len(sorted_sequence_list) - 1):
+        sorted_sequence_list = [s.replace(" ", "-") for s in sorted_sequence_list]
+        if len(sorted_sequence_list[i]) == len(sorted_sequence_list[i + 1]):
+            break
+        if len(sorted_sequence_list[i]) < len(sorted_sequence_list[i + 1]):
+            sorted_sequence_list[i] += "-" * (len(sorted_sequence_list[i + 1]) - len(sorted_sequence_list[i]))
+        else:
+            sorted_sequence_list[i + 1] += "-" * (len(sorted_sequence_list[i]) - len(sorted_sequence_list[i + 1]))
+
+    print(sorted_sequence_list)
+
 def AlignByDP():
 
     labels_list = get_label()
-    sorted_sequence_list = get_sequence_string()
-    for i in range(len(sorted_sequence_list) - 1):
-        if len(sorted_sequence_list[i]) == len(sorted_sequence_list[i + 1]):
-            break
-        #only adds gap to a shorter sequence, need to match length as well
-        if len(sorted_sequence_list[i]) < len(sorted_sequence_list[i + 1]):
-            sorted_sequence_list = [s.replace(" ", "-") for s in sorted_sequence_list]
-        #if sorted_sequence_list[i] > sorted_sequence_list[i + 1]:
 
-    print(sorted_sequence_list)
+    match_length()
     # alignment = Alignment(sorted_sequence_list[0], sorted_sequence_list[1])
     #
     # alignment.align_sequences()

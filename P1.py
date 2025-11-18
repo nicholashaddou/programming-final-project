@@ -42,4 +42,4 @@ def ParseSeqFile(string):
     list_from_dictionary = list(dictionary_of_lines.items())
     return list_from_dictionary
 
-ParseSeqFile("dummy file.txt")
+ParseSeqFile("dummy file alignment.txt")
