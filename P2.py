@@ -12,9 +12,9 @@ choose the best outcome for the end sequence
 
 if there is a gap, put " - " so the end sequences would have the same length
 """
-genomic_sequence = P1.dictionary_to_list("dummy file.txt") # this is a list
+genomic_sequence = P1.ParseSeqFile("dummy file.txt") # this is a list
 
-#method to extract the string of sequence from the list, label is stored elsewhere
+#method to extract the string of sequence and label from the list
 def get_sequence_string():
 
     list_of_sequences = []
@@ -23,7 +23,7 @@ def get_sequence_string():
         string_sequence = sequence[1]
         list_of_sequences.append(string_sequence)
 
-    print(list_of_sequences)
+    # print(list_of_sequences)
     return list_of_sequences
 
 def get_label():
@@ -33,7 +33,7 @@ def get_label():
         string_sequence = labels[0]
         list_of_labels.append(string_sequence)
 
-    print(list_of_labels)
+    #print(list_of_labels)
     return list_of_labels
 
 # labels_list = get_label()
@@ -69,19 +69,6 @@ class Cell:
 
 #----------------------------------------------------------
 
-def AlignByDP():
-
-    labels_list = get_label()
-    sorted_sequence_list = get_sequence_string()
-
-    match = 2
-    mismatch = -1
-    gap = -2
-
-    # sequence1 = sorted_sequence_list[0]
-    # sequence2 = sorted_sequence_list[1]
-
-
 class Alignment:
     def __init__(self, sequence1, sequence2, match = 2 ,mismatch = -1,gap = -2):
         self.sequence1 = sequence1
@@ -102,8 +89,10 @@ class Alignment:
         for j in range(1,col):
             self.matrix[0][j].score += self.gap
 
+
+def AlignByDP():
+
+    labels_list = get_label()
+    sorted_sequence_list = get_sequence_string()
+
 AlignByDP()
-
-
-
-
