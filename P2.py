@@ -84,15 +84,39 @@ class Alignment:
 
         self.matrix = [[Cell(i,j) for i in range(col) for j in range(row)]]
 
-        for i in range(1,row):
+        for i in range(0,row):
             self.matrix[i][0].score += self.gap
-        for j in range(1,col):
+        for j in range(0,col):
             self.matrix[0][j].score += self.gap
 
+    def align_sequences(self):
+        self.make_matrix()
+        for i in self.matrix:
+            for j in self.matrix:
+                if self.sequence1[i-1] == self.sequence2[j-1]:
+                    diag_score = self.matrix[i-1][j-1].get_score() + self.match
+                if self.sequence1[i-1] != self.sequence2[j-1]:
+                    diag_score = self.matrix[i-1][j-1].get_score() + self.mismatch
+                else:
+                    diag_score = self.matrix[i-1][j-1].get_score() + self.gap
+        pass
 
 def AlignByDP():
 
     labels_list = get_label()
     sorted_sequence_list = get_sequence_string()
+    for i in range(len(sorted_sequence_list) - 1):
+        if len(sorted_sequence_list[i]) == len(sorted_sequence_list[i + 1]):
+            break
+        #only adds gap to a shorter sequence, need to match length as well
+        if len(sorted_sequence_list[i]) < len(sorted_sequence_list[i + 1]):
+            sorted_sequence_list = [s.replace(" ", "-") for s in sorted_sequence_list]
+        #if sorted_sequence_list[i] > sorted_sequence_list[i + 1]:
+
+    print(sorted_sequence_list)
+    # alignment = Alignment(sorted_sequence_list[0], sorted_sequence_list[1])
+    #
+    # alignment.align_sequences()
+
 
 AlignByDP()
