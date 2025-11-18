@@ -70,7 +70,7 @@ class Cell:
 #----------------------------------------------------------
 
 class Alignment:
-    def __init__(self, sequence1, sequence2, match = 2 ,mismatch = -1,gap = -2):
+    def __init__(self, sequence1, sequence2, match = 6 ,mismatch = -2,gap = -2):
         self.sequence1 = sequence1
         self.sequence2 = sequence2
         self.match = match
@@ -96,27 +96,28 @@ class Alignment:
         col = len(self.sequence2) + 1
 
         #something wrong with the logic here
-        for i in range(1, row):
-            for j in range(1, col):
-                if self.sequence1[i-1] == self.sequence2[j-1]:
-                    diag_score = self.matrix[i-1][j-1].get_score() + self.match
-                if self.sequence1[i-1] != self.sequence2[j-1]:
-                    diag_score = self.matrix[i-1][j-1].get_score() + self.mismatch
-                else:
-                    diag_score = self.matrix[i-1][j-1].get_score() + self.gap
-
-        print(diag_score)
+        # for i in range(1, row):
+        #     for j in range(1, col):
+        #         if self.sequence1[i-1] == self.sequence2[j-1]:
+        #             diag_score = self.matrix[i-1][j-1].get_score() + self.match
+        #         if self.sequence1[i-1] != self.sequence2[j-1]:
+        #             diag_score = self.matrix[i-1][j-1].get_score() + self.mismatch
+        #         else:
+        #             diag_score = self.matrix[i-1][j-1].get_score() + self.gap
 
         # might work better
-        # diag = self.matrix[i - 1][j - 1].score + (
-        #     self.match if self.sequence1[i - 1] == self.sequence2[j - 1] else self.mismatch)
-        # up = self.matrix[i - 1][j].score + self.gap
-        # left = self.matrix[i][j - 1].score + self.gap
-        # self.matrix[i][j].score = max(diag, up, left)
+        for i in range(1, row):
+            for j in range(1, col):
+                diag = self.matrix[i - 1][j - 1].score + (
+                    self.match if self.sequence1[i - 1] == self.sequence2[j - 1] else self.mismatch)
+                up = self.matrix[i - 1][j].score + self.gap
+                left = self.matrix[i][j - 1].score + self.gap
+                self.matrix[i][j].score = max(diag, up, left)
 
 def match_length():
 
     # Only for two sequences, need to fix for more, not sure how Manuel will input the sequences
+    # also wrong logic for the algorithm, gotta fix later on
     sorted_sequence_list = get_sequence_string()
     for i in range(len(sorted_sequence_list) - 1):
         sorted_sequence_list = [s.replace(" ", "-") for s in sorted_sequence_list]
@@ -137,5 +138,6 @@ def AlignByDP():
     alignment = Alignment(sorted_sequence_list[0], sorted_sequence_list[1])
 
     alignment.align_sequences()
+    print(alignment.matrix[-1][-1].get_score())
 
 AlignByDP()
