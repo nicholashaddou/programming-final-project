@@ -1,0 +1,1 @@
+[('chue', 'TT'), ('schaf', 'CCCG'), ('esel', 'TTTA'), ('geiss', 'CTA')]
