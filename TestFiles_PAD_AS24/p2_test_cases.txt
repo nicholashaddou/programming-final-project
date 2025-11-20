@@ -1,0 +1,119 @@
+# Test cases for AlignbyDP function
+
+# Test Case 1: Normal sequences with varying lengths and gaps
+# Testing proper alignment of sequences with a mix of matches, mismatches, and gaps.
+pars_seq_1 = [
+    ('seq1', 'ACGT'),
+    ('seq2', 'ACGA'),
+    ('seq3', 'AC-T'),
+    ('seq4', 'A-TG')
+]
+
+# Test Case 2: Identical sequences
+# Testing that identical sequences are aligned without any gaps or mismatches.
+pars_seq_2 = [
+    ('seq1', 'ACTG'),
+    ('seq2', 'ACTG'),
+    ('seq3', 'ACTG')
+]
+
+# Test Case 3: Completely different sequences
+# Testing alignment of completely different sequences to verify handling of mismatches.
+pars_seq_3 = [
+    ('seq1', 'AAAA'),
+    ('seq2', 'TTTT'),
+    ('seq3', 'CCCC'),
+    ('seq4', 'GGGG')
+]
+
+# Test Case 4: Sequences with gaps
+# Testing alignment when sequences already contain gaps.
+pars_seq_4 = [
+    ('seq1', '-ACG'),
+    ('seq2', 'A-CG'),
+    ('seq3', 'AC-G'),
+    ('seq4', 'ACG-')
+]
+
+# Test Case 5: Single-character sequences
+# Testing alignment of single-character sequences, which can only result in matches or mismatches.
+pars_seq_5 = [
+    ('seq1', 'A'),
+    ('seq2', 'T'),
+    ('seq3', 'G'),
+    ('seq4', 'C')
+]
+
+# Test Case 6: Empty sequences
+# Testing handling of empty sequences. Should return empty alignments or an error.
+pars_seq_6 = [
+    ('seq1', ''),
+    ('seq2', '')
+]
+
+# Test Case 7: Mismatched sequence lengths
+# Testing alignment of sequences with mismatched lengths to ensure proper gap insertion.
+pars_seq_7 = [
+    ('seq1', 'ACTG'),
+    ('seq2', 'AC')
+]
+
+Output:
+Test Case 1:
+Input Sequences:
+seq1: ACGT
+seq2: ACGA
+seq3: AC-T
+seq4: A-TG
+{(0, 1): ('ACGT', 'ACGA'), (0, 2): ('ACGT', 'AC-T'), (0, 3): ('ACGT', 'A-TG'), (1, 2): ('ACGA', 'AC-T'), (1, 3): ('ACGA', 'A-TG'), (2, 3): ('AC-T-', 'A--TG')}
+{(0, 1): ('ACGT', 'ACGA'), (0, 2): ('ACGT', 'AC-T'), (0, 3): ('ACGT', 'A-TG'), (1, 2): ('ACGA', 'AC-T'), (1, 3): ('ACGA', 'A-TG'), (2, 3): ('AC-T-', 'A--TG')}
+------------------------------
+Test Case 2:
+Input Sequences:
+seq1: ACTG
+seq2: ACTG
+seq3: ACTG
+{(0, 1): ('ACTG', 'ACTG'), (0, 2): ('ACTG', 'ACTG'), (1, 2): ('ACTG', 'ACTG')}
+{(0, 1): ('ACTG', 'ACTG'), (0, 2): ('ACTG', 'ACTG'), (1, 2): ('ACTG', 'ACTG')}
+------------------------------
+Test Case 3:
+Input Sequences:
+seq1: AAAA
+seq2: TTTT
+seq3: CCCC
+seq4: GGGG
+{(0, 1): ('AAAA', 'TTTT'), (0, 2): ('AAAA', 'CCCC'), (0, 3): ('AAAA', 'GGGG'), (1, 2): ('TTTT', 'CCCC'), (1, 3): ('TTTT', 'GGGG'), (2, 3): ('CCCC', 'GGGG')}
+{(0, 1): ('AAAA', 'TTTT'), (0, 2): ('AAAA', 'CCCC'), (0, 3): ('AAAA', 'GGGG'), (1, 2): ('TTTT', 'CCCC'), (1, 3): ('TTTT', 'GGGG'), (2, 3): ('CCCC', 'GGGG')}
+------------------------------
+Test Case 4:
+Input Sequences:
+seq1: -ACG
+seq2: A-CG
+seq3: AC-G
+seq4: ACG-
+{(0, 1): ('-ACG', 'A-CG'), (0, 2): ('-AC-G', '-AC-G'), (0, 3): ('-ACG-', '-ACG-'), (1, 2): ('A-CG', 'AC-G'), (1, 3): ('A-CG-', 'A-CG-'), (2, 3): ('AC-G', 'ACG-')}
+{(0, 1): ('-ACG', 'A-CG'), (0, 2): ('-AC-G', '-AC-G'), (0, 3): ('-ACG-', '-ACG-'), (1, 2): ('A-CG', 'AC-G'), (1, 3): ('A-CG-', 'A-CG-'), (2, 3): ('AC-G', 'ACG-')}
+------------------------------
+Test Case 5:
+Input Sequences:
+seq1: A
+seq2: T
+seq3: G
+seq4: C
+{(0, 1): ('A', 'T'), (0, 2): ('A', 'G'), (0, 3): ('A', 'C'), (1, 2): ('T', 'G'), (1, 3): ('T', 'C'), (2, 3): ('G', 'C')}
+{(0, 1): ('A', 'T'), (0, 2): ('A', 'G'), (0, 3): ('A', 'C'), (1, 2): ('T', 'G'), (1, 3): ('T', 'C'), (2, 3): ('G', 'C')}
+------------------------------
+Test Case 6:
+Input Sequences:
+seq1: 
+seq2: 
+{(0, 1): ('', '')}
+{(0, 1): ('', '')}
+------------------------------
+Test Case 7:
+Input Sequences:
+seq1: ACTG
+seq2: AC
+{(0, 1): ('ACTG', 'AC--')}
+{(0, 1): ('ACTG', 'AC--')}
+------------------------------
