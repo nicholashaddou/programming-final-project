@@ -38,7 +38,7 @@ def ParseSeqFile(string):
         text_file.close()
         raise ValueError("Malformed input")
 
-    text_file.close()
+    text_file.close() #probably should just use with open instead but whatevs it works for now
     list_from_dictionary = list(dictionary_of_lines.items())
     return list_from_dictionary
 
