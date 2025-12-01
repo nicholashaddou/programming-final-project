@@ -1,0 +1,90 @@
+
+# Test Case 1: Normal Input with Gaps
+input_dict_1 = {
+    (0, 1): ('-ATC', 'G-CC'),
+    (0, 2): ('A-TG', 'AT-C'),
+    (1, 2): ('G-CC', 'AT-C')
+}
+
+# Test Case 2: Fully Divergent Sequences
+input_dict_2 = {
+    (0, 1): ('AAAA', 'TTTT'),
+    (0, 2): ('CCCC', 'GGGG'),
+    (1, 2): ('TTTT', 'GGGG')
+}
+
+# Test Case 3: Identical Sequences
+input_dict_3 = {
+    (0, 1): ('ACTG', 'ACTG'),
+    (0, 2): ('ACTG', 'ACTG'),
+    (1, 2): ('ACTG', 'ACTG')
+}
+
+# Test Case 4: Mixed Matches and Mismatches
+input_dict_4 = {
+    (0, 1): ('ACGT', 'ACGA'),
+    (0, 2): ('A-TG', 'AT-C'),
+    (1, 2): ('ACGA', 'AT-C')
+}
+
+# Test Case 5: All Gaps
+input_dict_5 = {
+    (0, 1): ('----', '----'),
+    (0, 2): ('----', '----'),
+    (1, 2): ('----', '----')
+}
+
+# Test Case 6: Empty Sequences
+input_dict_6 = {
+    (0, 1): ('', ''),
+    (0, 2): ('', ''),
+    (1, 2): ('', '')
+}
+
+# Test Case 7: Sequences with Single Character
+input_dict_7 = {
+    (0, 1): ('A', 'T'),
+    (0, 2): ('A', 'A'),
+    (1, 2): ('T', 'A')
+}
+
+# Test Case 8: Invalid Input (Length Mismatch)
+input_dict_8 = {
+    (0, 1): ('ACTG', 'ACT'),
+    (0, 2): ('ACTG', 'ACTGAC'),
+    (1, 2): ('ACT', 'ACTGAC')
+}
+
+Output:
+Test Case 1:
+Distance Matrix:
+[[0.0, 0.8239592165010822, 0.8239592165010822], [0.8239592165010822, 0.0, 0.8239592165010822], [0.8239592165010822, 0.8239592165010822, 0.0]]
+------------------------------
+Test Case 2:
+Distance Matrix:
+[[0.0, 30.0, 30.0], [30.0, 0.0, 30.0], [30.0, 30.0, 0.0]]
+------------------------------
+Test Case 3:
+Distance Matrix:
+[[0.0, 0.0, 0.0], [0.0, 0.0, 0.0], [0.0, 0.0, 0.0]]
+------------------------------
+Test Case 4:
+Distance Matrix:
+[[0.0, 0.30409883108112323, 0.8239592165010822], [0.30409883108112323, 0.0, 1.6479184330021643], [0.8239592165010822, 1.6479184330021643, 0.0]]
+------------------------------
+Test Case 5:
+Distance Matrix:
+Malformed Input
+------------------------------
+Test Case 6:
+Distance Matrix:
+Malformed Input
+------------------------------
+Test Case 7:
+Distance Matrix:
+[[0.0, 30.0, 0.0], [30.0, 0.0, 30.0], [0.0, 30.0, 0.0]]
+------------------------------
+Test Case 8:
+Distance Matrix:
+Malformed Input
+------------------------------

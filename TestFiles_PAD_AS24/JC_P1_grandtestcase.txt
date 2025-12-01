@@ -1,0 +1,34 @@
+# Test file for all edge cases
+
+# Valid sequence, should be included
+>DragonFly ACCAAACATCCAAACACCAACCCCAGCCCTTACGCAATCATACAAAGAATATT
+
+# Comment line, should be ignored
+# This is a test comment that shouldn't be parsed
+
+# Valid sequence with mixed case letters, should normalize to uppercase
+>BlueWhale aCcAaaCCTGTCCCCATCTaACaCCaaCCcACAtAtAcAAGcTaaACCaAAAAtACC
+
+# Empty sequence, should be skipped
+>EmptyStar
+
+# Valid sequence spanning multiple lines, should concatenate properly
+>Falcon 
+ACTATACCCACCCAACTCGA
+CCTACACCAATCCCCACATAGC
+ACACAGACCAACAACCTC
+
+# Invalid sequence with special characters, should be ignored
+>InvalidPhoenix @CCAA$CTGTT!C$CC%CTAAACCAACCC
+
+# Comment in the middle of the file, should be ignored
+# This is a comment separating the valid and invalid cases
+
+# Valid sequence with spaces, should remove spaces and include
+>BlackPanther ACC CCA CCA CCC AA CCA CTCC AAC CCC ACTA AAC CATC CAA
+
+# Invalid sequence with non-nucleotide letters, should be ignored
+>BadMonkey ACCGTZRYYAACTAGGCTACXZ
+
+# Another valid sequence, testing random label and sequence format
+>CyberShark GGTAACTTGCCAAACGCTTAACTGGAAACCATG

@@ -31,14 +31,15 @@ def ParseSeqFile(string):
     try:
         for words in dictionary_of_lines.values():
             for char in words:
-                if char not in ('A', 'C', 'T', 'G') and not char.isspace():
+                if char not in ('A', 'C', 'T', 'G', 'a', 'c', 't', 'g') and not char.isspace():
                     raise ValueError(f"malformed input due to: {char} at {words}")
+
     except ValueError:
         text_file.close()
         raise ValueError("Malformed input")
 
+    text_file.close() #probably should just use with open instead but whatevs it works for now
     list_from_dictionary = list(dictionary_of_lines.items())
-    text_file.close()
     return list_from_dictionary
 
-ParseSeqFile("dummy file.txt")
+ParseSeqFile("dummy file alignment.txt")

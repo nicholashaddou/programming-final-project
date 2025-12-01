@@ -1,0 +1,118 @@
+test_cases = [
+    # Test Case 1: Simple Symmetric Matrix
+    (
+        [[0.0, 5.0, 9.0, 9.0], 
+         [5.0, 0.0, 10.0, 10.0], 
+         [9.0, 10.0, 0.0, 8.0], 
+         [9.0, 10.0, 8.0, 0.0]],
+        ["A", "B", "C", "D"]
+    ),
+    
+    # Test Case 2: Perfect Clustering
+    (
+        [[0.0, 2.0, 6.0, 10.0], 
+         [2.0, 0.0, 5.0, 9.0], 
+         [6.0, 5.0, 0.0, 4.0], 
+         [10.0, 9.0, 4.0, 0.0]],
+        ["A", "B", "C", "D"]
+    ),
+    
+    # Test Case 3: Asymmetric Distances
+    (
+        [[0.0, 1.0, 5.0, 7.0], 
+         [1.0, 0.0, 4.0, 8.0], 
+         [5.0, 4.0, 0.0, 2.0], 
+         [7.0, 8.0, 2.0, 0.0]],
+        ["X", "Y", "Z", "W"]
+    ),
+
+    # Test Case 4: Already Clustered Data
+    (
+        [[0.0, 2.0, 10.0, 10.0], 
+         [2.0, 0.0, 10.0, 10.0], 
+         [10.0, 10.0, 0.0, 5.0], 
+         [10.0, 10.0, 5.0, 0.0]],
+        ["Alpha", "Beta", "Gamma", "Delta"]
+    ),
+
+    # Test Case 5: Large Matrix
+    (
+        [[0.0, 3.0, 8.0, 10.0, 12.0], 
+         [3.0, 0.0, 7.0, 9.0, 11.0], 
+         [8.0, 7.0, 0.0, 4.0, 6.0], 
+         [10.0, 9.0, 4.0, 0.0, 2.0], 
+         [12.0, 11.0, 6.0, 2.0, 0.0]],
+        ["A", "B", "C", "D", "E"]
+    ),
+
+    # Test Case 6: Edge Case (Single Element)
+    (
+        [[0.0]],
+        ["Single"]
+    ),
+
+    # Test Case 7: Edge Case (Two Elements)
+    (
+        [[0.0, 5.0], 
+         [5.0, 0.0]],
+        ["X", "Y"]
+    ),
+
+    # Test Case 8: All Gaps
+    (
+        [[0.0, 0.0, 0.0, 0.0], 
+         [0.0, 0.0, 0.0, 0.0], 
+         [0.0, 0.0, 0.0, 0.0], 
+         [0.0, 0.0, 0.0, 0.0]],
+        ["A", "B", "C", "D"]
+    ),
+
+    # Test Case 9: Completely Different Sequences
+    (
+        [[0.0, 30.0, 30.0, 30.0], 
+         [30.0, 0.0, 30.0, 30.0], 
+         [30.0, 30.0, 0.0, 30.0], 
+         [30.0, 30.0, 30.0, 0.0]],
+        ["W", "X", "Y", "Z"]
+    ),
+
+    # Test Case 10: Mixed Matches and Gaps
+    (
+        [[0.0, 1.0, 5.0, 7.0], 
+         [1.0, 0.0, 4.0, 8.0], 
+         [5.0, 4.0, 0.0, 2.0], 
+         [7.0, 8.0, 2.0, 0.0]],
+        ["M1", "M2", "M3", "M4"]
+    )
+]
+
+OUTPUT:
+Test Case 1:
+Final Tree: ((A,B),(C,D))
+
+Test Case 2:
+Final Tree: ((A,B),(C,D))
+
+Test Case 3:
+Final Tree: ((X,Y),(Z,W))
+
+Test Case 4:
+Final Tree: ((Gamma,Delta),(Alpha,Beta))
+
+Test Case 5:
+Final Tree: (((D,E),C),(A,B))
+
+Test Case 6:
+Final Tree: Single
+
+Test Case 7:
+Final Tree: (X,Y)
+
+Test Case 8:
+Final Tree: ((A,B),(C,D))
+
+Test Case 9:
+Final Tree: ((W,X),(Y,Z))
+
+Test Case 10:
+Final Tree: ((M1,M2),(M3,M4))

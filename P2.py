@@ -5,16 +5,16 @@ compare two sequences of two different species, which come in the form of a list
 
 we have to iterate through the string, compare each char, and give the corresponding values
 values:
-        match = 2
-        mismatch = -1
-        gap = -2
+        match = 5 m
+        mismatch = -2
+        gap = -6
 choose the best outcome for the end sequence
 
 if there is a gap, put " - " so the end sequences would have the same length
 """
-genomic_sequence = P1.dictionary_to_list("dummy file.txt") # this is a list
+genomic_sequence = P1.ParseSeqFile("dummy file alignment.txt") # this is a list
 
-#method to extract the string of sequence from the list, label is stored elsewhere
+#method to extract the string of sequence and label from the list
 def get_sequence_string():
 
     list_of_sequences = []
@@ -23,7 +23,7 @@ def get_sequence_string():
         string_sequence = sequence[1]
         list_of_sequences.append(string_sequence)
 
-    print(list_of_sequences)
+    # print(list_of_sequences)
     return list_of_sequences
 
 def get_label():
@@ -33,7 +33,7 @@ def get_label():
         string_sequence = labels[0]
         list_of_labels.append(string_sequence)
 
-    print(list_of_labels)
+    #print(list_of_labels)
     return list_of_labels
 
 # labels_list = get_label()
@@ -68,8 +68,9 @@ class Cell:
         return self.prev_cell
 
 #----------------------------------------------------------
+
 class Alignment:
-    def __init__(self, sequence1, sequence2, match = 2 ,mismatch = -1,gap = -2):
+    def __init__(self, sequence1, sequence2, match = 5 ,mismatch = -2,gap = -6):
         self.sequence1 = sequence1
         self.sequence2 = sequence2
         self.match = match
@@ -78,34 +79,83 @@ class Alignment:
         self.matrix = []
 
     def make_matrix(self):
+
         row = len(self.sequence1) + 1
         col = len(self.sequence2) + 1
 
-        self.matrix = [[Cell(i, j) for j in range(col)] for i in range(row)] #CHATGPT was used here, prompt: the matrix made rows instead of a 2d matrix
+        self.matrix = [[Cell(i, j) for j in range(col)] for i in range(row)] #chatgpt was used here, prompt: what is wrong with this? [block of code]
 
-        for i in range(1,row):
-            self.matrix[i][0].score += self.gap
-        for j in range(1,col):
-            self.matrix[0][j].score += self.gap
+        for i in range(row):
+            self.matrix[i][0].set_score(i * self.gap)
+            if i > 0:
+                self.matrix[i][0].set_previous_cell(self.matrix[i - 1][0])
+        for j in range(col):
+            self.matrix[0][j].set_score(j * self.gap)
+            if j > 0:
+                self.matrix[0][j].set_previous_cell(self.matrix[0][j - 1])
 
     def align_sequences(self):
-        labels_list = get_label()
-        sorted_sequence_list = get_sequence_string()
-        self.sequence1 = sorted_sequence_list[0]
-        self.sequence2 = sorted_sequence_list[1]
-        # at this point we have the two sequences
 
+        self.make_matrix()
+        row = len(self.sequence1) + 1
+        col = len(self.sequence2) + 1
 
-# def AlignByDP(Alignment):
-#     alignment  = Alignment()
-#     alignment.make_matrix()
-#     alignment.align_sequences()
+        aligned_sequences = []
 
+        # might work better
+        for i in range(1, row):
+            for j in range(1, col):
+                diag_score = self.matrix[i - 1][j - 1].get_score() + (
+                    self.match if self.sequence1[i - 1] == self.sequence2[j - 1] else self.mismatch
+                )
+                up_score = self.matrix[i - 1][j].get_score() + self.gap
+                left_score = self.matrix[i][j - 1].get_score() + self.gap
 
+                max_score = max(diag_score, up_score, left_score)
+                self.matrix[i][j].set_score(max_score)
 
+                # Set prev_cell with tie-aware logic: favor gaps (up, left) over diagonal
+                if max_score == up_score:
+                    self.matrix[i][j].set_previous_cell(self.matrix[i - 1][j])
+                elif max_score == left_score:
+                    self.matrix[i][j].set_previous_cell(self.matrix[i][j - 1])
+                else:
+                    self.matrix[i][j].set_previous_cell(self.matrix[i - 1][j - 1])
+        # Traceback to get the aligned sequences
 
-# AlignByDP()
+        aligned_sequence1 = ""
+        aligned_sequence2 = ""
+        cell = self.matrix[row - 1][col - 1]  # start from bottom-right
 
+        while cell.get_previous_cell() is not None:
+            i, j = cell.get_row(), cell.get_col()
+            prev_cell = cell.get_previous_cell()
+            prev_i, prev_j = prev_cell.get_row(), prev_cell.get_col()
 
+            if i - 1 == prev_i and j - 1 == prev_j:  # diagonal
+                aligned_sequence1 = self.sequence1[i - 1] + aligned_sequence1
+                aligned_sequence2 = self.sequence2[j - 1] + aligned_sequence2
+            elif i - 1 == prev_i:  # up (gap in seq2)
+                aligned_sequence1 = self.sequence1[i - 1] + aligned_sequence1
+                aligned_sequence2 = "-" + aligned_sequence2
+            else:  # left (gap in seq1)
+                aligned_sequence1 = "-" + aligned_sequence1
+                aligned_sequence2 = self.sequence2[j - 1] + aligned_sequence2
 
+            cell = prev_cell
 
+        print(aligned_sequence1)
+        print(aligned_sequence2)
+
+        return aligned_sequences
+
+def AlignByDP():
+
+    labels_list = get_label()
+    sorted_sequence_list = get_sequence_string()
+
+    alignment = Alignment(sorted_sequence_list[0], sorted_sequence_list[1])
+
+    alignment.align_sequences()
+
+AlignByDP()
