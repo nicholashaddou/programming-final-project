@@ -2,16 +2,7 @@ import itertools
 import P1
 
 """
-compare two sequences of two different species, which come in the form of a list of pairs
-
-we have to iterate through the string, compare each char, and give the corresponding values
-values:
-        match = 5 m
-        mismatch = -2
-        gap = -6
-choose the best outcome for the end sequence
-
-if there is a gap, put " - " so the end sequences would have the same length
+TODO: fix docstrings
 """
 genomic_sequence = P1.ParseSeqFile("dummy file alignment.txt") # this is a list
 
