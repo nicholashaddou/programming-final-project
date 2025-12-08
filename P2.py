@@ -1,3 +1,4 @@
+import itertools
 import P1
 
 """
@@ -144,18 +145,36 @@ class Alignment:
 
             cell = prev_cell
 
-        print(aligned_sequence1)
-        print(aligned_sequence2)
+        aligned_sequences.append(aligned_sequence1)
+        aligned_sequences.append(aligned_sequence2)
 
+        #print(aligned_sequences)
         return aligned_sequences
 
-def AlignByDP():
+def AlignByDP(sequence_list=None):
 
-    labels_list = get_label()
-    sorted_sequence_list = get_sequence_string()
+    if sequence_list is None:
+        sequence_list = get_sequence_string()
+    # labels_list = get_label()
 
-    alignment = Alignment(sorted_sequence_list[0], sorted_sequence_list[1])
+    # alignment = Alignment(sequence_list[0], sequence_list[1])
+    # alignment.align_sequences()
 
-    alignment.align_sequences()
+    if sequence_list is None:
+        sequence_list = get_sequence_string()
+    results = {}
+
+    # Generate all unique index pairs: (0,1), (0,2), (1,2), ...
+    for i, j in itertools.combinations(range(len(sequence_list)), 2):
+        seq1 = sequence_list[i]
+        seq2 = sequence_list[j]
+
+        aligner = Alignment(seq1, seq2)
+        aligned1, aligned2 = aligner.align_sequences()
+
+        results[(i, j)] = (aligned1, aligned2)
+
+    print(results)
+    return results
 
 AlignByDP()
