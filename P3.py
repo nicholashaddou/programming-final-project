@@ -22,7 +22,7 @@ def ComputeDistMatrix():
             for char in i:
                 if char == '-':
                     count += 1
-                    length_without_gap = len(i) - count
+                    length_without_gap = len(sequence1) - count
                     if length_without_gap != 0:
                         p_value = count / length_without_gap
                     else:
