@@ -55,6 +55,7 @@ def ComputeDistMatrix(dictionary_of_distances=None):
     seq_names = sorted(seq_names)
     n = len(seq_names)
 
+    #CHATGPT was used here, prompt: matrix did not fill correctly from dictionary, fix it [block of code]
     # Initialize matrix
     dist_matrix = np.zeros((n, n))
 
