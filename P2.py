@@ -155,7 +155,6 @@ def AlignByDP(sequence_list=None):
         sequence_list = get_sequence_string()
     results = {}
 
-    # Generate all unique index pairs: (0,1), (0,2), (1,2), ...
     for i, j in itertools.combinations(range(len(sequence_list)), 2):
         seq1 = sequence_list[i]
         seq2 = sequence_list[j]

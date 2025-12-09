@@ -1,5 +1,6 @@
 >Mouse TTCATA
 >bOVINE TGCTCGTA
 
->orangutan TGCTCGTA
->wolf TTCATA
+>orangutan ATCTAT AAAGAT CAT
+>wolf AGAT ATGAA
+>shark ACGTAGCTAGCTAGCTA
