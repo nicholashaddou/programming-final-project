@@ -25,7 +25,7 @@ def get_label():
         string_sequence = labels[0]
         list_of_labels.append(string_sequence)
 
-    #print(list_of_labels)
+    print(list_of_labels)
     return list_of_labels
 
 # labels_list = get_label()
