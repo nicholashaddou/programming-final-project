@@ -2,6 +2,9 @@ import P2
 import math
 import numpy as np
 
+"""
+a function to calculate the evolutionary distance between sequences based on the P2.AlignByDP 
+"""
 def calculate_evolutionary_distance():
     dictionary_of_distances = P2.AlignByDP()
     evolutionary_distance = 0
@@ -43,7 +46,9 @@ def calculate_evolutionary_distance():
         distance_dictionary[key] = evolutionary_distance
 
     return distance_dictionary
-
+"""
+Computing the matrix of distances from the distance dictionary found from the previous function.
+"""
 def ComputeDistMatrix(dictionary_of_distances=None):
 
     if dictionary_of_distances is None:

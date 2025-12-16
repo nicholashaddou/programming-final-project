@@ -32,7 +32,9 @@ class Cell:
         return self.prev_cell
 
 #----------------------------------------------------------
-
+"""
+Alignment class for the sequences
+"""
 class Alignment:
     def __init__(self, sequence1, sequence2, match = 5 ,mismatch = -2,gap = -6):
         self.sequence1 = sequence1.upper()
@@ -41,7 +43,9 @@ class Alignment:
         self.mismatch = mismatch
         self.gap = gap
         self.matrix = []
-
+    """
+    the scoring matrix
+    """
     def make_matrix(self):
 
         row = len(self.sequence1) + 1
@@ -57,7 +61,9 @@ class Alignment:
             self.matrix[0][j].set_score(j * self.gap)
             if j > 0:
                 self.matrix[0][j].set_previous_cell(self.matrix[0][j - 1])
-
+    """
+    Sequence Alignment function
+    """
     def align_sequences(self):
 
         self.make_matrix()
@@ -112,7 +118,9 @@ class Alignment:
 
         #print(aligned_sequences)
         return aligned_sequences
-
+"""
+This function aligns the P1 sequences based on dynamic programming
+"""
 def AlignByDP(sequence_list=None):
 
     if sequence_list is None:
