@@ -2,13 +2,6 @@ import itertools
 import P1
 
 """
-TODO: fix docstrings
-"""
-
-# labels_list = get_label()
-# sorted_sequence_list = get_sequence_string()
-
-"""
 Setting cells
 """
 class Cell:

@@ -14,16 +14,25 @@ def ParseSeqFile(string):
 
     try:
         for line in lines:
-            if not (line[0].startswith('>') or line[0].isspace()):
-                raise ValueError(f"malformed input at: {line}") #fine
+            # if not (line[0].startswith('>') or line[0].isspace()):
+            #     raise ValueError(f"malformed input at: {line}") #fine
+            #
+            # if line.startswith('>'):
+            #     parts = line[1:].split()
+            #     if len(parts) < 2:
+            #         raise ValueError(f"malformed input at: {line}")
+
+            # label = parts[0]
+            # sequence = parts[1]
+            # dictionary_of_lines[label] = sequence
 
             if line.startswith('>'):
                 parts = line[1:].split()
-                if len(parts) < 2:
+
+                if len(parts) != 2:
                     raise ValueError(f"malformed input at: {line}")
 
-                label = parts[0]
-                sequence = parts[1]
+                label, sequence = parts
                 dictionary_of_lines[label] = sequence
 
         for words in dictionary_of_lines.values():
