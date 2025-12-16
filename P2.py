@@ -4,19 +4,6 @@ import P1
 """
 TODO: fix docstrings
 """
-genomic_sequence = P1.ParseSeqFile("dummy file alignment.txt") # this is a list
-
-#method to extract the string of sequence and label from the list
-def get_sequence_string():
-
-    list_of_sequences = []
-
-    for sequence in genomic_sequence:
-        string_sequence = sequence[1]
-        list_of_sequences.append(string_sequence)
-
-    # print(list_of_sequences)
-    return list_of_sequences
 
 # labels_list = get_label()
 # sorted_sequence_list = get_sequence_string()
@@ -135,14 +122,14 @@ class Alignment:
 def AlignByDP(sequence_list=None):
 
     if sequence_list is None:
-        sequence_list = get_sequence_string()
+        sequence_list = P1.get_sequence_string()
     # labels_list = get_label()
 
     # alignment = Alignment(sequence_list[0], sequence_list[1])
     # alignment.align_sequences()
 
     if sequence_list is None:
-        sequence_list = get_sequence_string()
+        sequence_list = P1.get_sequence_string()
     results = {}
 
     for i, j in itertools.combinations(range(len(sequence_list)), 2):

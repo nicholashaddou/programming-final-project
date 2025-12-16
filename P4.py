@@ -3,10 +3,11 @@ import P2
 import numpy as np
 from collections import defaultdict
 
+import P1
 matrix = P3.ComputeDistMatrix()
 #print("matrix from P3:", matrix)
 
-labels = P2.get_label()
+labels = P1.get_label()
 
 def input_validation (matrix,labels):
     # Type checks
