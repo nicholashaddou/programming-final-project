@@ -83,11 +83,10 @@ class Alignment:
                     self.matrix[i][j].set_previous_cell(self.matrix[i][j - 1])
                 else:
                     self.matrix[i][j].set_previous_cell(self.matrix[i - 1][j - 1])
-        # Traceback to get the aligned sequences
 
         aligned_sequence1 = ""
         aligned_sequence2 = ""
-        cell = self.matrix[row - 1][col - 1]  # start from bottom-right
+        cell = self.matrix[row - 1][col - 1]
 
         while cell.get_previous_cell() is not None:
             i, j = cell.get_row(), cell.get_col()
@@ -100,7 +99,7 @@ class Alignment:
             elif i - 1 == prev_i:  # up (gap in seq2)
                 aligned_sequence1 = self.sequence1[i - 1] + aligned_sequence1
                 aligned_sequence2 = "-" + aligned_sequence2
-            else:  # left (gap in seq1)
+            else:
                 aligned_sequence1 = "-" + aligned_sequence1
                 aligned_sequence2 = self.sequence2[j - 1] + aligned_sequence2
 

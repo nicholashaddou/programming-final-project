@@ -14,26 +14,26 @@ def ParseSeqFile(string):
 
     try:
         for line in lines:
-            # if not (line[0].startswith('>') or line[0].isspace()):
-            #     raise ValueError(f"malformed input at: {line}") #fine
-            #
-            # if line.startswith('>'):
-            #     parts = line[1:].split()
-            #     if len(parts) < 2:
-            #         raise ValueError(f"malformed input at: {line}")
-
-            # label = parts[0]
-            # sequence = parts[1]
-            # dictionary_of_lines[label] = sequence
+            if not (line[0].startswith('>') or line[0].isspace()):
+                raise ValueError(f"malformed input at: {line}") #fine
 
             if line.startswith('>'):
                 parts = line[1:].split()
-
-                if len(parts) != 2:
+                if len(parts) < 2:
                     raise ValueError(f"malformed input at: {line}")
 
-                label, sequence = parts
-                dictionary_of_lines[label] = sequence
+            label = parts[0]
+            sequence = parts[1]
+            dictionary_of_lines[label] = sequence
+
+            # if line.startswith('>'):
+            #     parts = line[1:].split()
+            #
+            #     if len(parts) != 2:
+            #         raise ValueError(f"malformed input at: {line}")
+            #
+            #     label, sequence = parts
+            #     dictionary_of_lines[label] = sequence
 
         for words in dictionary_of_lines.values():
             for char in words:
@@ -50,10 +50,12 @@ def ParseSeqFile(string):
     #print(list_from_dictionary)
     return list_from_dictionary
 
-#method to extract the string of sequence and label from the list
+"""
+method to extract the string of sequence from the list
+"""
 def get_sequence_string():
 
-    genomic_sequence = ParseSeqFile("dummy file alignment.txt")
+    genomic_sequence = ParseSeqFile("sequences2.txt")
     list_of_sequences = []
 
     for sequence in genomic_sequence:
@@ -63,9 +65,12 @@ def get_sequence_string():
     #print(list_of_sequences)
     return list_of_sequences
 
+"""
+Method to extract label from the list
+"""
 def get_label():
 
-    genomic_sequence = ParseSeqFile("dummy file alignment.txt")
+    genomic_sequence = ParseSeqFile("sequences2.txt")
     list_of_labels = []
     for labels in genomic_sequence:
         string_sequence = labels[0]
@@ -73,5 +78,3 @@ def get_label():
 
     #print(list_of_labels)
     return list_of_labels
-
-get_label()

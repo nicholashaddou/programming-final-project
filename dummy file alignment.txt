@@ -1,4 +1,4 @@
->   Muus    AACA
+>   Muus    AA CA
 >Bovine   AATAC
->  Gibbon   ACTATACCCA
->c at Acagtcata
+> Gibbon   ACTATACCCA
+>         cat   Acagtcata
