@@ -23,7 +23,7 @@ def ParseSeqFile(string):
                     raise ValueError(f"malformed input at: {line}")
 
             label = parts[0]
-            sequence = ''.join(parts[1:]).replace(" ", "")
+            sequence = ''.join(parts[1:]).replace(" ", "")    
             dictionary_of_lines[label] = sequence
 
             # if line.startswith('>'):
@@ -59,7 +59,7 @@ def get_sequence_string():
     list_of_sequences = []
 
     for sequence in genomic_sequence:
-        string_sequence = sequence[1]
+        string_sequence = sequence[1].replace(" ", "")
         list_of_sequences.append(string_sequence)
 
     #print(list_of_sequences)
@@ -78,3 +78,7 @@ def get_label():
 
     #print(list_of_labels)
     return list_of_labels
+
+if __name__ == "__main__":
+    results = ParseSeqFile("sequences2.txt")
+    print(results)

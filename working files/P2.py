@@ -1,6 +1,8 @@
 import itertools
 import P1
 
+genomic_sequence = P1.ParseSeqFile("sequences2.txt") # this is a list
+
 """
 Setting cells
 """
@@ -33,8 +35,8 @@ class Cell:
 
 class Alignment:
     def __init__(self, sequence1, sequence2, match = 5 ,mismatch = -2,gap = -6):
-        self.sequence1 = sequence1
-        self.sequence2 = sequence2
+        self.sequence1 = sequence1.upper()
+        self.sequence2 = sequence2.upper()
         self.match = match
         self.mismatch = mismatch
         self.gap = gap
@@ -76,13 +78,13 @@ class Alignment:
                 max_score = max(diag_score, up_score, left_score)
                 self.matrix[i][j].set_score(max_score)
 
-                # Set prev_cell with tie-aware logic: favor gaps (up, left) over diagonal
-                if max_score == up_score:
-                    self.matrix[i][j].set_previous_cell(self.matrix[i - 1][j])
-                elif max_score == left_score:
-                    self.matrix[i][j].set_previous_cell(self.matrix[i][j - 1])
-                else:
+                # Set prev_cell with tie-aware logic: favor diagonal over gaps
+                if max_score == diag_score: #copilot fixed logic here
                     self.matrix[i][j].set_previous_cell(self.matrix[i - 1][j - 1])
+                elif max_score == up_score:
+                    self.matrix[i][j].set_previous_cell(self.matrix[i - 1][j])
+                else:
+                    self.matrix[i][j].set_previous_cell(self.matrix[i][j - 1])
 
         aligned_sequence1 = ""
         aligned_sequence2 = ""
@@ -110,7 +112,6 @@ class Alignment:
 
         #print(aligned_sequences)
         return aligned_sequences
-
 
 def AlignByDP(sequence_list=None):
 
