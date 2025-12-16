@@ -38,7 +38,18 @@ def ParseSeqFile(string):
     text_file.close() #probably should just use 'with open' instead but whatevs it works for now
     list_from_dictionary = list(dictionary_of_lines.items())
 
-    #print(list_from_dictionary)
+    print(list_from_dictionary)
     return list_from_dictionary
 
-ParseSeqFile("dummy file alignment.txt")
+def get_label():
+
+    genomic_sequence = ParseSeqFile("dummy file alignment.txt")
+    list_of_labels = []
+    for labels in genomic_sequence:
+        string_sequence = labels[0]
+        list_of_labels.append(string_sequence)
+
+    print(list_of_labels)
+    return list_of_labels
+
+get_label()

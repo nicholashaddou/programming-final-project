@@ -18,16 +18,6 @@ def get_sequence_string():
     # print(list_of_sequences)
     return list_of_sequences
 
-def get_label():
-
-    list_of_labels = []
-    for labels in genomic_sequence:
-        string_sequence = labels[0]
-        list_of_labels.append(string_sequence)
-
-    print(list_of_labels)
-    return list_of_labels
-
 # labels_list = get_label()
 # sorted_sequence_list = get_sequence_string()
 
